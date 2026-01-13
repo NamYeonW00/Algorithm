@@ -1,24 +1,29 @@
-import java.util.Scanner;
-class Main {
+import java.io.*;
+import java.util.*;
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		
-		int num = input.nextInt();
-		
-		int[] arr = new int[11];
-		arr[1] = 1;
-		arr[2] = 2;
-		arr[3] = 4;
-		
-		for (int i = 0; i < num; i++) {
-			int n = input.nextInt();
-			for (int j = 4; j <= n; j++)
-				arr[j] = arr[j - 1] + arr[j - 2] + arr[j - 3];
-			System.out.println(arr[n]);
-		}
-		
-		input.close();
-	}
+public class Main{
+  public static void main(String args[]) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    int n = Integer.parseInt(br.readLine());
+
+    int[] dp = new int[11];
+
+    dp[1] = 1;
+    dp[2] = 2;
+    dp[3] = 4;
+
+    for (int i = 4; i <= 10; i++) {
+      dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+    }
+
+    StringBuilder sb = new StringBuilder();
+    
+    for (int i = 0; i < n; i++) {
+      int num = Integer.parseInt(br.readLine());
+      sb.append(dp[num]).append('\n');
+    }
+
+    System.out.println(sb.toString());
+  }
 }
